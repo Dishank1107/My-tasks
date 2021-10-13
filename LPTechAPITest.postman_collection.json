@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "a6d63991-2d66-46a9-a33a-55232ceb0f09",
+		"name": "LPTechAPITest",
+		"description": "LPTechAPITest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LPTestRequest1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable('token',jsonData.auth_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "api-token",
+						"value": "yDDMSF9k3OQ0z3uVuOTG92CET-UhRYQtgModvmzbkLO4omvK7jdvfFg62ksgR9hBZgQ",
+						"type": "text"
+					},
+					{
+						"key": "user-email",
+						"value": "Dishanksingh1107@gmail.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://www.universal-tutorial.com/api/getaccesstoken",
+					"protocol": "https",
+					"host": [
+						"www",
+						"universal-tutorial",
+						"com"
+					],
+					"path": [
+						"api",
+						"getaccesstoken"
+					]
+				},
+				"description": "LPTestRequest1"
+			},
+			"response": []
+		},
+		{
+			"name": "LTTechAPIRequest2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"//verify response contains\r",
+							"let jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test('response contains state_name `Dadra and Nagar Haveli', () => {\r",
+							"    _.each(jsonData.Fee, (item) => {\r",
+							"        pm.expect(item.state_name).to.include('Dadra and Nagar Haveli')\r",
+							"    })\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://www.universal-tutorial.com/api/states/India",
+					"protocol": "https",
+					"host": [
+						"www",
+						"universal-tutorial",
+						"com"
+					],
+					"path": [
+						"api",
+						"states",
+						"India"
+					]
+				},
+				"description": "LTTechAPIRequest2"
+			},
+			"response": []
+		}
+	]
+}
